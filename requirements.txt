@@ -27,7 +27,7 @@ OctoPrint==1.4.2
 OctoPrint-FileCheck==2020.8.7
 OctoPrint-FirmwareCheck==2020.6.22
 pathtools==0.1.2
-pigpio==1.46
+pigpio==1.78
 pkginfo==1.5.0.1
 psutil==5.7.2
 pyasn1==0.4.8
