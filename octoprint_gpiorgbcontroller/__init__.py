@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import absolute_import
 import octoprint.plugin
-from gpiozero.pins.rpigpio import RPiGPIOFactory
+from gpiozero.pins.pigpio import PiGPIOFactory
 from gpiozero import RGBLED, Button
 
 
@@ -20,13 +20,15 @@ class GpiorgbcontrollerPlugin(octoprint.plugin.StartupPlugin,
 		self.gcode_command_enable = False
 		self.gcode_index_enable = False
 		self.gcode_rgb_index = 1
-		self.pin_factory = RPiGPIOFactory()
+		self.pin_factory = PiGPIOFactory()
 	
 
 	def init_rgb(self, red_pin, grn_pin, blu_pin):
 		try:
 			self.deinit_rgb()
 			self.led = RGBLED(red=red_pin, green=grn_pin, blue=blu_pin, active_high=True, pin_factory=self.pin_factory)
+			for led in self.led._leds:
+				led.frequency = 10000;
 			self._logger.info("LEDs initialized with pin factory: " + str(self.led.pin_factory))
 		except:
 			self._logger.error("Error occurred while initializing LEDs")
